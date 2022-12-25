@@ -1,7 +1,5 @@
 <script>
-
-	import Convert from "./convert.svelte";
-
+	import Convert from './convert.svelte';
 </script>
 
 <!-- FIELDSETS: logic. start for textbox if not already   -->

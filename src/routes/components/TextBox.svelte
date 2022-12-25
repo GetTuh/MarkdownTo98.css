@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let text: string;
 </script>
+
 <!-- Textbox height has to be dependent on the length of the text!  -->
 <textarea
 	readonly

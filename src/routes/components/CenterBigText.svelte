@@ -1,13 +1,13 @@
 <script lang="ts">
 	export let text: string;
 
-	export let icon:string
+	export let icon: string;
 	const iconPath = `icons/${icon}.png`;
 </script>
 
 <div class="status-bar">
 	<div class="status-bar-field">
-		<img src={iconPath} alt="{iconPath}" style="height:2rem" />
+		<img src={iconPath} alt={iconPath} style="height:2rem" />
 		<b style="margin: 1rem;">{text}</b>
 	</div>
 </div>
