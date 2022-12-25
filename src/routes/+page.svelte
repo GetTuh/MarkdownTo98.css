@@ -1,12 +1,11 @@
-<script lang="ts">
-	import TitleBar from './components/TitleBar.svelte';
-	import TextSegment from './components/TextSegment.svelte';
-	import CenterBigText from './components/CenterBigText.svelte';
-  import TextBox from './components/TextBox.svelte';
-  import BottomWindowSegment from './components/BottomWindowSegment.svelte';
+<script>
+
+	import Convert from "./convert.svelte";
+
 </script>
+
 <!-- FIELDSETS: logic. start for textbox if not already   -->
-<div>
+<!-- <div>
 	<div class="window" style="width: auto;margin:.5rem;max-width:40rem">
 		<TitleBar text="yo this is a text" />
 
@@ -24,7 +23,8 @@
     <BottomWindowSegment textArray={['a','b','c','dsa']} />
 	</div>
   
-</div>
+</div> -->
+<Convert />
 
 <style>
 	fieldset {
