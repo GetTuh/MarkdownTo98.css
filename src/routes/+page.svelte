@@ -23,9 +23,3 @@
   
 </div> -->
 <Convert />
-
-<style>
-	fieldset {
-		margin: 1rem;
-	}
-</style>
