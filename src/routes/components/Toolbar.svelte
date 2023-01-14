@@ -55,6 +55,8 @@
 		top: 1px;
 		left: 1px;
 		cursor: pointer;
+		background-color: rgb(0, 0, 128);
+		color:white
 	}
 	.menus {
 		flex: 0 0 auto;
