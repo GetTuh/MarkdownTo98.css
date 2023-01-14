@@ -1,21 +1,28 @@
 <script context="module" lang="ts">
 	const testJson = {
-		name: 'some note from faunadb',
+		name: 'some note from  faunadb',
 		date: '01/01/2022',
-		readme: 'readme'
+		readme:
+			'readme \n	![alt-text](https://imgs.search.brave.com/KVwlbXZEgpshiLfSmljzSe6uhurGYdfjMBtU9ZHOecU/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly93d3cu/dGhlc3BydWNlcGV0/cy5jb20vdGhtYi9T/blJtU3FQMFN1R1FP/QVhieGNnVk9hdEZi/SEE9LzIxMjN4MTQx/My9maWx0ZXJzOmZp/bGwoYXV0bywxKS9H/ZXR0eUltYWdlcy0x/MjE5NTk4MjAyLTQw/MGUwMTI2YWJmNTQz/MWY5ZTFhZDc0Mjg2/YWRiNWVkLmpwZw)'
 	};
 	const headerRegex = new RegExp(/(#+ )(.*)/);
-	let regexBold = new RegExp(/(\*\*|__)(.*?)\1/g);
-	let regexItalic = /\_(\S(.*?\S)?)\_/gm;
+	const regexBold = new RegExp(/(\*\*|__)(.*?)\1/g);
+	const regexItalic = /\_(\S(.*?\S)?)\_/gm;
+	const regexImage = /!\[([^\[]+)\]\(([^\)]+)\)/g;
 	const isHeader = (line: string) => headerRegex.test(line);
 	const isBox = (line: string) => line.startsWith('>');
 	// const makeBold = (line:string) =>
 	export const convertToHtml = (text: string) => {
-		// text = text.replaceAll(regexBold, '<b>$2</b>')
 		let html = text.split('\n');
 		for (let x = 0; x < html.length; x++) {
 			html = html.filter((item) => (item ? true : false));
-			html[x] = html[x].replaceAll(regexBold, '<b>$2</b>').replaceAll(regexItalic, '<i>$1</i>');
+			html[x] = html[x]
+				.replaceAll(regexBold, '<b>$2</b>')
+				.replaceAll(regexItalic, '<i>$1</i>')
+				.replaceAll(
+					regexImage,
+					'</br><fieldset style="background-color:#dfdfdf;padding:unset"><img src=\'$2\' style="display:block;margin:auto;max-width:100%"alt=\'$1\'></fieldset>'
+				);
 		}
 		return html;
 	};
@@ -52,5 +59,8 @@
 <style>
 	fieldset {
 		margin: 1rem;
+	}
+	img {
+		margin: 5%;
 	}
 </style>
