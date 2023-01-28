@@ -10,8 +10,9 @@
 		date: '01/01/2022',
 		readme: ``
 	};
-	let htmlAll=''
-	// export let noteText: string;
+
+	export let noteText: string;
+	console.log(noteText);
 	const headerRegex = new RegExp(/(#+ )(.*)/);
 	const regexBold = new RegExp(/(\*\*|__)(.*?)\1/g);
 	const regexItalic = /\_(\S(.*?\S)?)\_/gm;
@@ -32,26 +33,25 @@
 					);
 			}
 		}
-		htmlAll=html
+		return html;
 	};
+	let htmlAll = convertToHtml(noteText);
 </script>
 
 <div>
-	<div class="window" style="width: auto;margin:.5rem;max-width:40rem">
-		<TitleBar text={testJson.name} />
+	<div class="window" style="width: auto; margin: 0.5rem; max-width: 40rem">
+		<TitleBar text="{testJson.name}" />
 		<Toolbar />
 		<fieldset>
-			{#each htmlAll as line}
-				{#if isHeader(line)}
-					<CenterBigText text={line.substring(3)} icon="accessibility_two_windows" />
-				{:else if isBox(line)}
-					<TextBox text={line.substring(1)} />
-				{:else if line == '* * *' || line == '***'}
-					<!-- <BottomWindowSegment textArray={['...']} /> -->
-				{:else}
-					<TextSegment text={line} />
-				{/if}
-			{/each}
+			{#each htmlAll as line} {#if isHeader(line)}
+			<CenterBigText text="{line.substring(3)}" icon="accessibility_two_windows" />
+			{:else if isBox(line)}
+			<TextBox text="{line.substring(1)}" />
+			{:else if line == '* * *' || line == '***'}
+			<!-- <BottomWindowSegment textArray={['...']} /> -->
+			{:else}
+			<TextSegment text="{line}" />
+			{/if} {/each}
 		</fieldset>
 	</div>
 </div>
