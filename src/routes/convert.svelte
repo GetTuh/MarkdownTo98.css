@@ -34,7 +34,7 @@
 		}
 		return html;
 	};
-	const htmlAll = convertToHtml(noteText);
+	export const htmlAll = convertToHtml(noteText);
 </script>
 
 <div>
