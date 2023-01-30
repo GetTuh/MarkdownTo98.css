@@ -2,6 +2,7 @@
 	// @ts-nocheck
 
 	import Convert from './convert.svelte';
+	let convertcomponent
 	let noteText = `Help:
 # 	 Heading 
 **bold text**
@@ -11,8 +12,8 @@ _italic text_
 </script>
 
 <div class="boxi">
-	<textarea bind:value={noteText} on:input={()=>Convert.convertToHtml(noteText)} />
-	<Convert {noteText} />
+	<textarea bind:value={noteText} on:input={convertcomponent.convertToHtml(noteText)} />
+	<Convert bind:this={convertcomponent}/>
 </div>
 <div>
 	Help:

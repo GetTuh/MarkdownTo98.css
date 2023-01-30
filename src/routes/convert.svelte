@@ -10,8 +10,8 @@
 		date: '01/01/2022',
 		readme: ``
 	};
-	let htmlAll:any;
-	export let noteText: string;
+	let htmlAll=''
+	// export let noteText: string;
 	const headerRegex = new RegExp(/(#+ )(.*)/);
 	const regexBold = new RegExp(/(\*\*|__)(.*?)\1/g);
 	const regexItalic = /\_(\S(.*?\S)?)\_/gm;
