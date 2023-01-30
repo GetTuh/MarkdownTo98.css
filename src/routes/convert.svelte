@@ -10,7 +10,7 @@
 		date: '01/01/2022',
 		readme: ``
 	};
-
+	let htmlAll:any;
 	export let noteText: string;
 	const headerRegex = new RegExp(/(#+ )(.*)/);
 	const regexBold = new RegExp(/(\*\*|__)(.*?)\1/g);
@@ -32,9 +32,8 @@
 					);
 			}
 		}
-		return html;
+		htmlAll=html
 	};
-	export const htmlAll = convertToHtml(noteText);
 </script>
 
 <div>

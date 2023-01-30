@@ -11,7 +11,7 @@ _italic text_
 </script>
 
 <div class="boxi">
-	<textarea bind:value={noteText} on:input={()=>Convert.htmlAll(noteText)} />
+	<textarea bind:value={noteText} on:input={()=>Convert.convertToHtml(noteText)} />
 	<Convert {noteText} />
 </div>
 <div>
