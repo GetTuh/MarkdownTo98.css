@@ -10,7 +10,7 @@
 		date: '01/01/2022',
 		readme: ``
 	};
-	let htmlAll=''
+	let htmlAll = '';
 	// export let noteText: string;
 	const headerRegex = new RegExp(/(#+ )(.*)/);
 	const regexBold = new RegExp(/(\*\*|__)(.*?)\1/g);
@@ -22,36 +22,33 @@
 		let html = text.split('\n');
 		for (let x = 0; x < html.length; x++) {
 			if (html[x]) {
-				html = html.filter((item) => (item ? true : false));
+				html = html.filter((item) => item);
 				html[x] = html[x]
 					.replaceAll(regexBold, '<b>$2</b>')
 					.replaceAll(regexItalic, '<i>$1</i>')
 					.replaceAll(
 						regexImage,
-						'</br><fieldset style="background-color:#dfdfdf;padding:unset"><img src=\'$2\' style="display:block;margin:auto;max-width:100%"alt=\'$1\'></fieldset>'
+						'</br><fieldset style="background-color:#dfdfdf;padding:unset"><img src=\'$2\' style="display:block;margin:auto;max-width:100%"><p style="    text-align: center;">$1</p></fieldset>'
 					);
 			}
 		}
-		htmlAll=html
+		htmlAll = html;
 	};
 </script>
 
 <div>
-	<div class="window" style="width: auto;margin:.5rem;max-width:40rem">
-		<TitleBar text={testJson.name} />
+	<div class="window" style="width: auto; margin: 0.5rem; max-width: 40rem">
+		<TitleBar text="{testJson.name}" />
 		<Toolbar />
 		<fieldset>
-			{#each htmlAll as line}
-				{#if isHeader(line)}
-					<CenterBigText text={line.substring(3)} icon="accessibility_two_windows" />
-				{:else if isBox(line)}
-					<TextBox text={line.substring(1)} />
-				{:else if line == '* * *' || line == '***'}
-					<!-- <BottomWindowSegment textArray={['...']} /> -->
-				{:else}
-					<TextSegment text={line} />
-				{/if}
-			{/each}
+			{#each htmlAll as line} {#if isHeader(line)}
+			<CenterBigText text="{line.substring(3)}" icon="accessibility_two_windows" />
+			{:else if isBox(line)}
+			<TextBox text="{line.substring(1)}" />
+			{:else if line == '* * *' || line == '***'} <BottomWindowSegment textArray={['...']} />
+			{:else}
+			<TextSegment text="{line}" />
+			{/if} {/each}
 		</fieldset>
 	</div>
 </div>
@@ -59,5 +56,16 @@
 <style>
 	fieldset {
 		margin: 1rem;
+	}
+
+	imagesubtitle {
+		background: rgb(0, 128, 128);
+		text-align: center;
+		color: white;
+		display: inline-block;
+		/* padding: 0.1rem; */
+		padding-left: 0.4rem;
+		padding-right: 0.4rem;
+		padding-top: 0;
 	}
 </style>

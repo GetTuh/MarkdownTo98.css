@@ -21,6 +21,7 @@ _italic text_
 	<ul>**bold text**</ul>
 	<ul>_italic text_</ul>
 	<ul>>blockquotes</ul>
+	<ul>![image](https://link.com)</ul>
 </div>
 
 <style>
