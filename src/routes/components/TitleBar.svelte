@@ -3,7 +3,9 @@
 </script>
 
 <div class="title-bar">
-	<div class="title-bar-text" style="font-size: medium;">{text}</div>
+	
+	<img src={'MarkdownTo98.css/static/icons/user_computer-1.png'} alt={'user_computer-1.png'} style="height:1rem" />
+	<div class="title-bar-text" style="font-size: medium;margin-right: 23rem;">{text}</div>
 	<div class="title-bar-controls">
 		<button aria-label="Minimize" />
 		<button aria-label="Maximize" />

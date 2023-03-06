@@ -39,7 +39,10 @@
 <div>
 	<div class="window" style="width: auto; margin: 0.5rem; max-width: 40rem">
 		<TitleBar text="{testJson.name}" />
+
+		<fieldset style="margin-top:.1rem;padding:0%">
 		<Toolbar />
+
 		<fieldset>
 			{#each htmlAll as line} {#if isHeader(line)}
 			<CenterBigText text="{line.substring(3)}" icon="accessibility_two_windows" />
@@ -49,15 +52,12 @@
 			{:else}
 			<TextSegment text="{line}" />
 			{/if} {/each}
+			</fieldset>
 		</fieldset>
 	</div>
 </div>
 
 <style>
-	fieldset {
-		margin: 1rem;
-	}
-
 	imagesubtitle {
 		background: rgb(0, 128, 128);
 		text-align: center;
