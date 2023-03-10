@@ -12,11 +12,10 @@
 	};
 	let htmlAll = '';
 	// export let noteText: string;
-	const headerRegex = new RegExp(/(#+ )(.*)/);
 	const regexBold = new RegExp(/(\*\*|__)(.*?)\1/g);
 	const regexItalic = /\_(\S(.*?\S)?)\_/gm;
 	const regexImage = /!\[([^\[]+)\]\(([^\)]+)\)/g;
-	const isHeader = (line: string) => headerRegex.test(line);
+	const isHeader = (line: string) => line.startsWith('# ');
 	const isBox = (line: string) => line.startsWith('>');
 	export const convertToHtml = (text: string) => {
 		let html = text.split('\n');
