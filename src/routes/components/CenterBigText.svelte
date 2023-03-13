@@ -2,7 +2,7 @@
 	export let text: string;
 
 	export let icon: string;
-	const iconPath = `MarkdownTo98.css/static/icons/${icon}.png`;
+	const iconPath = `work/static/icons/${icon}.png`;
 </script>
 
 <div class="status-bar">
