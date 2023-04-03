@@ -37,9 +37,8 @@
 	<div class="window" style="width: auto; margin: 0.5rem; max-width: 40rem">
 
 		<TitleBar text="{title}" />
-		<fieldset style="padding: 0;">
 		<Toolbar />
-		<fieldset>
+		<fieldset class="inner">
 			{#each htmlAll as line}
 				{#if isHeader(line)}
 					<CenterBigText text={line.substring(3)} icon="accessibility_two_windows" />
@@ -52,13 +51,13 @@
 				{/if}
 			{/each}
 		</fieldset>
-	</fieldset>
+
 	</div>
 </div>
 
 <style>
-	fieldset {
-		margin: 1rem;
+	.inner {
+		margin: .25rem
 	}
 
 	imagesubtitle {

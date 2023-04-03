@@ -13,7 +13,7 @@
 	</div>
 	<div class="menus" role="menubar" aria-label="Application Menu" style="touch-action: none;">
 		<div
-			class="menu-button "
+			class="menu-button"
 			aria-expanded="false"
 			aria-haspopup="true"
 			role="menuitem"
@@ -56,7 +56,7 @@
 		left: 1px;
 		cursor: pointer;
 		background-color: rgb(0, 0, 128);
-		color:white
+		color: white;
 	}
 	.menus {
 		flex: 0 0 auto;
@@ -67,8 +67,22 @@
 	.menu-hotkey {
 		text-decoration: underline;
 	}
-    .item-disabled{
-        color: rgb(128, 128, 128);
-    text-shadow: 0.8px 0.8px 0px rgb(255 255 255);
-    }
+	.item-disabled {
+		color: rgb(128, 128, 128);
+		text-shadow: 0.8px 0.8px 0px rgb(255 255 255);
+	}
+	.toolbar-drag-handle {
+		align-self: stretch;
+		position: relative;
+		touch-action: none;
+		color: #dfdfdf;
+		border-width: 1px;
+		left: 2px;
+		top: 2px;
+		width: 4px;
+		bottom: 1px;
+		box-sizing: border-box;
+		border-color: rgb(255, 255, 255) rgb(128, 128, 128) rgb(128, 128, 128) rgb(255, 255, 255);
+		border: solid;
+	}
 </style>
