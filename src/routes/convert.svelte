@@ -5,11 +5,6 @@
 	import TextBox from './components/TextBox.svelte';
 	import BottomWindowSegment from './components/BottomWindowSegment.svelte';
 	import Toolbar from './components/Toolbar.svelte';
-	const testJson = {
-		name: 'some note from  faunadb',
-		date: '01/01/2022',
-		readme: ``
-	};
 	let htmlAll = '';
 	// export let noteText: string;
 	const headerRegex = new RegExp(/(#+ )(.*)/);
@@ -17,9 +12,11 @@
 	const regexItalic = /\_(\S(.*?\S)?)\_/gm;
 	const regexImage = /!\[([^\[]+)\]\(([^\)]+)\)/g;
 	const isHeader = (line: string) => headerRegex.test(line);
-	const isBox = (line: string) => line.startsWith('>');
-	export const convertToHtml = (text: string) => {
+	const isBox = (line: string) => line.startsWith('>')
+	export let title: string;
+	export const convertToHtml = (text: string,faunaTitle:string) => {
 		let html = text.split('\n');
+		title = faunaTitle
 		for (let x = 0; x < html.length; x++) {
 			if (html[x]) {
 				html = html.filter((item) => item);
@@ -38,24 +35,29 @@
 
 <div>
 	<div class="window" style="width: auto; margin: 0.5rem; max-width: 40rem">
-		<TitleBar text="{testJson.name}" />
+
+		<TitleBar text="{title}" />
 		<Toolbar />
-		<fieldset>
-			{#each htmlAll as line} {#if isHeader(line)}
-			<CenterBigText text="{line.substring(3)}" icon="accessibility_two_windows" />
-			{:else if isBox(line)}
-			<TextBox text="{line.substring(1)}" />
-			{:else if line == '* * *' || line == '***'} <BottomWindowSegment textArray={['...']} />
-			{:else}
-			<TextSegment text="{line}" />
-			{/if} {/each}
+		<fieldset class="inner">
+			{#each htmlAll as line}
+				{#if isHeader(line)}
+					<CenterBigText text={line.substring(3)} icon="accessibility_two_windows" />
+				{:else if isBox(line)}
+					<TextBox text={line.substring(1)} />
+				{:else if line == '* * *' || line == '***'}
+					<BottomWindowSegment textArray={['...']} />
+				{:else}
+					<TextSegment text={line} />
+				{/if}
+			{/each}
 		</fieldset>
+
 	</div>
 </div>
 
 <style>
-	fieldset {
-		margin: 1rem;
+	.inner {
+		margin: .25rem
 	}
 
 	imagesubtitle {

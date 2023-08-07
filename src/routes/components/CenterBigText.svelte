@@ -2,7 +2,7 @@
 	export let text: string;
 
 	export let icon: string;
-	const iconPath = `icons/${icon}.png`;
+	const iconPath = `https://win98icons.alexmeub.com/icons/png/${icon}.png`;
 </script>
 
 <div class="status-bar">
