@@ -12,11 +12,14 @@
 	const regexItalic = /\_(\S(.*?\S)?)\_/gm;
 	const regexImage = /!\[([^\[]+)\]\(([^\)]+)\)/g;
 	const isHeader = (line: string) => headerRegex.test(line);
-	const isBox = (line: string) => line.startsWith('>')
-	export let title: string;
-	export const convertToHtml = (text: string,faunaTitle:string) => {
+	const isBox = (line: string) => line.startsWith('>');
+	let title: string;
+	let date:string
+	export const convertToHtml = (text: string, faunaTitle: string,faunaDate:string) => {
 		let html = text.split('\n');
-		title = faunaTitle
+		title = faunaTitle;
+		date = faunaDate
+		console.log(`date: ${date}`)
 		for (let x = 0; x < html.length; x++) {
 			if (html[x]) {
 				html = html.filter((item) => item);
@@ -35,9 +38,10 @@
 
 <div>
 	<div class="window" style="width: auto; margin: 0.5rem; max-width: 40rem">
-
-		<TitleBar text="{title}" />
-		<Toolbar />
+		<TitleBar text={title} />
+		<fieldset class='toolbar'>
+			<Toolbar date={date}/>
+		</fieldset>
 		<fieldset class="inner">
 			{#each htmlAll as line}
 				{#if isHeader(line)}
@@ -51,23 +55,27 @@
 				{/if}
 			{/each}
 		</fieldset>
-
 	</div>
 </div>
 
 <style>
 	.inner {
-		margin: .25rem
+		margin: 0.25rem;
 	}
-
+/* 
 	imagesubtitle {
 		background: rgb(0, 128, 128);
 		text-align: center;
 		color: white;
 		display: inline-block;
-		/* padding: 0.1rem; */
+		padding: 0.1rem;
 		padding-left: 0.4rem;
 		padding-right: 0.4rem;
 		padding-top: 0;
+	} */
+	.toolbar{
+		margin:0%;
+		padding:0%;
+		margin-top:0.1%;
 	}
 </style>

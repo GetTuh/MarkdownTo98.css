@@ -1,3 +1,7 @@
+<script lang="ts">
+	export let date: string;
+</script>
+
 <div class="toolbar" id="menu-bar-toolbar">
 	<div class="toolbar-drag-handle" />
 	<div class="menus" role="menubar" aria-label="Application Menu" style="touch-action: none;">
@@ -22,6 +26,16 @@
 			<span class="menu-hotkey">E</span>nglish
 		</div>
 	</div>
+	<div class="note-date">
+		<fieldset class="datexd">
+			{date}
+		</fieldset>
+
+		<div class="buttons">
+			<button class="arrow-button up-button" disabled> &#9650; </button>
+			<button class="arrow-button down-button" disabled> &#9660; </button>
+		</div>
+	</div>
 </div>
 
 <style>
@@ -30,19 +44,42 @@
 		flex-direction: row;
 		align-items: center;
 		/* border: 1px solid var(--ButtonShadow); */
-		/* margin: 2px; */
+		margin: 2px;
 		overflow: hidden;
 		position: relative;
 		color: var(--ButtonText);
-		font-family: sans-serif;
 		font-size: 10pt;
+	}
+	.datexd {
+		padding: 0.1rem;
+		margin: 0%;
+		background-color: white;
+		font-size: smaller;
+	}
+	.note-date {
+		display: flex;
+		align-items: center;
+		margin-left: auto;
+	}
+
+	.buttons {
+		display: flex;
+		flex-direction: column;
+		margin-left: auto;
+		padding-left: 0.2rem;
+		align-items: center;
+	}
+	.arrow-button {
+		padding: 1.2px;
+		min-width: 20px;
+		min-height: 8px;
+
+		font-size: 5px;
 	}
 	.menu-button {
 		box-sizing: border-box;
 		height: 18px;
 		line-height: 1;
-		margin-top: 1px;
-		margin-bottom: 1px;
 		padding: 2px 5px;
 		position: relative;
 		outline: 0;
@@ -50,8 +87,12 @@
 	}
 
 	.menu-button:hover {
-		box-shadow: 1px 1px 0 rgb(128 128 128) inset, -1px -1px 0 rgb(255 255 255) inset;
-		box-shadow: 1px 1px 0 rgb(128, 128, 128) inset, -1px -1px 0 rgb(128, 128, 128) inset;
+		box-shadow:
+			1px 1px 0 rgb(128 128 128) inset,
+			-1px -1px 0 rgb(255 255 255) inset;
+		box-shadow:
+			1px 1px 0 rgb(128, 128, 128) inset,
+			-1px -1px 0 rgb(128, 128, 128) inset;
 		top: 1px;
 		left: 1px;
 		cursor: pointer;
@@ -76,11 +117,12 @@
 		position: relative;
 		touch-action: none;
 		color: #dfdfdf;
-		border-width: 1px;
+		border-width: 3px;
 		left: 2px;
 		top: 2px;
 		width: 4px;
-		bottom: 1px;
+		bottom: 2px;
+		margin-bottom: 2px;
 		box-sizing: border-box;
 		border-color: rgb(255, 255, 255) rgb(128, 128, 128) rgb(128, 128, 128) rgb(255, 255, 255);
 		border: solid;
