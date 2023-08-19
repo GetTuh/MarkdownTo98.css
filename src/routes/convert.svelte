@@ -36,8 +36,8 @@
 	};
 </script>
 
-<div>
-	<div class="window" style="width: auto; margin: 0.5rem; max-width: 40rem">
+<div style="margin-left:0.5rem;margin-right:0.5rem;margin-top:0.2rem">
+	<div class="window" style="width: auto; margin: auto; max-width: 40rem">
 		<TitleBar text={title} />
 		<fieldset class='toolbar'>
 			<Toolbar date={date}/>
