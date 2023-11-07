@@ -15,7 +15,7 @@
 	const isBox = (line: string) => line.startsWith('>');
 	let title: string;
 	let date:string
-	export const convertToHtml = (text: string, faunaTitle: string,faunaDate:string) => {
+	export const convertToHtml = (text='', faunaTitle: string,faunaDate:string) => {
 		let html = text.split('\n');
 		title = faunaTitle;
 		date = faunaDate
