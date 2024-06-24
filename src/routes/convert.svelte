@@ -19,7 +19,6 @@
 		let html = text.split('\n');
 		title = faunaTitle;
 		date = faunaDate
-		console.log(`date: ${date}`)
 		for (let x = 0; x < html.length; x++) {
 			if (html[x]) {
 				html = html.filter((item) => item);
