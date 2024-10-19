@@ -28,10 +28,23 @@
 						imagePattern,
 						`
 						</br>
-						<fieldset style="background-color:#dfdfdf; padding:unset;">
+						<div class="window" style="width: 100%">
+  <div class="title-bar">
+    <div class="title-bar-text">$1</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize"></button>
+      <button aria-label="Maximize"></button>
+      <button aria-label="Close"></button>
+	  
+    </div>
+	
+  </div>
+  						<fieldset style="background-color:#dfdfdf; padding:unset;">
 							<img src='$2' style="display:block; margin:auto; max-width:100%;">
-							<p style="text-align: center;">$1</p>
+					
 						</fieldset>
+</div>
+
 		  `
 					);
 				} else {
