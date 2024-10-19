@@ -23,19 +23,20 @@
 			.split('\n')
 			.filter(Boolean)
 			.map((line) => {
-				return line
-					.replace(boldPattern, '<b>$2</b>')
-					.replace(italicPattern, '<i>$1</i>')
-					.replace(
+				if (imagePattern.test(line)) {
+					return line.replace(
 						imagePattern,
 						`
-			</br>
-			<fieldset style="background-color:#dfdfdf; padding:unset;">
-			  <img src='$2' style="display:block; margin:auto; max-width:100%;">
-			  <p style="text-align: center;">$1</p>
-			</fieldset>
+						</br>
+						<fieldset style="background-color:#dfdfdf; padding:unset;">
+							<img src='$2' style="display:block; margin:auto; max-width:100%;">
+							<p style="text-align: center;">$1</p>
+						</fieldset>
 		  `
 					);
+				} else {
+					return line.replace(boldPattern, '<b>$2</b>').replace(italicPattern, '<i>$1</i>');
+				}
 			});
 	};
 
