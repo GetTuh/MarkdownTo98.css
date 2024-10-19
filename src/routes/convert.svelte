@@ -18,7 +18,7 @@
 	export const convertToHtml = (text: string = '', faunaTitle: string, faunaDate: string) => {
 		title = faunaTitle;
 		date = faunaDate;
-
+		console.log(text.match(imagePattern));
 		htmlAll = text
 			.split('\n')
 			.filter(Boolean)
@@ -57,7 +57,7 @@
 						icon="accessibility_two_windows"
 					/>
 				{:else if isBox(line)}
-					<TextBox text={line.substring(1).trim()} />
+					<TextBox text={line.substring(0).trim()} />
 				{:else if line === '* * *' || line === '***'}
 					<BottomWindowSegment textArray={['...']} />
 				{:else}
