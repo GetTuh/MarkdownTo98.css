@@ -5,49 +5,60 @@
 	import TextBox from './components/TextBox.svelte';
 	import BottomWindowSegment from './components/BottomWindowSegment.svelte';
 	import Toolbar from './components/Toolbar.svelte';
-	let htmlAll = '';
-	// export let noteText: string;
-	const headerRegex = new RegExp(/(#+ )(.*)/);
-	const regexBold = new RegExp(/(\*\*|__)(.*?)\1/g);
-	const regexItalic = /\_(\S(.*?\S)?)\_/gm;
-	const regexImage = /!\[([^\[]+)\]\(([^\)]+)\)/g;
-	const isHeader = (line: string) => headerRegex.test(line);
-	const isBox = (line: string) => line.startsWith('>');
+
+	let htmlAll: string[] = [];
+	const headerPattern = /^(#+) (.+)/;
+	const boldPattern = /(\*\*|__)(.*?)\1/g;
+	const italicPattern = /_(\S(.*?\S)?)_/g;
+	const imagePattern = /!\[([^\[]+)\]\(([^\)]+)\)/g;
+
 	let title: string;
-	let date:string
-	export const convertToHtml = (text='', faunaTitle: string,faunaDate:string) => {
-		let html = text.split('\n');
+	let date: string;
+
+	export const convertToHtml = (text: string = '', faunaTitle: string, faunaDate: string) => {
 		title = faunaTitle;
-		date = faunaDate
-		for (let x = 0; x < html.length; x++) {
-			if (html[x]) {
-				html = html.filter((item) => item);
-				html[x] = html[x]
-					.replaceAll(regexBold, '<b>$2</b>')
-					.replaceAll(regexItalic, '<i>$1</i>')
-					.replaceAll(
-						regexImage,
-						'</br><fieldset style="background-color:#dfdfdf;padding:unset"><img src=\'$2\' style="display:block;margin:auto;max-width:100%"><p style="    text-align: center;">$1</p></fieldset>'
+		date = faunaDate;
+
+		htmlAll = text
+			.split('\n')
+			.filter(Boolean)
+			.map((line) => {
+				return line
+					.replace(boldPattern, '<b>$2</b>')
+					.replace(italicPattern, '<i>$1</i>')
+					.replace(
+						imagePattern,
+						`
+			</br>
+			<fieldset style="background-color:#dfdfdf; padding:unset;">
+			  <img src='$2' style="display:block; margin:auto; max-width:100%;">
+			  <p style="text-align: center;">$1</p>
+			</fieldset>
+		  `
 					);
-			}
-		}
-		htmlAll = html;
+			});
 	};
+
+	const isHeader = (line: string) => headerPattern.test(line);
+	const isBox = (line: string) => line.startsWith('>');
 </script>
 
-<div style="margin-left:0.5rem;margin-right:0.5rem;margin-top:0.2rem">
-	<div class="window" style="width: auto; margin: auto; max-width: 40rem">
+<div style="margin: 0.2rem 0.5rem;">
+	<div class="window" style="max-width: 40rem; margin: auto;">
 		<TitleBar text={title} />
-		<fieldset class='toolbar'>
-			<Toolbar date={date}/>
+		<fieldset class="toolbar">
+			<Toolbar {date} />
 		</fieldset>
 		<fieldset class="inner">
 			{#each htmlAll as line}
 				{#if isHeader(line)}
-					<CenterBigText text={line.substring(3)} icon="accessibility_two_windows" />
+					<CenterBigText
+						text={line.substring(line.indexOf(' ') + 1)}
+						icon="accessibility_two_windows"
+					/>
 				{:else if isBox(line)}
-					<TextBox text={line.substring(1)} />
-				{:else if line == '* * *' || line == '***'}
+					<TextBox text={line.substring(1).trim()} />
+				{:else if line === '* * *' || line === '***'}
 					<BottomWindowSegment textArray={['...']} />
 				{:else}
 					<TextSegment text={line} />
@@ -61,7 +72,7 @@
 	.inner {
 		margin: 0.25rem;
 	}
-/* 
+	/* 
 	imagesubtitle {
 		background: rgb(0, 128, 128);
 		text-align: center;
@@ -72,9 +83,9 @@
 		padding-right: 0.4rem;
 		padding-top: 0;
 	} */
-	.toolbar{
-		margin:0%;
-		padding:0%;
-		margin-top:0.1%;
+	.toolbar {
+		margin: 0%;
+		padding: 0%;
+		margin-top: 0.1%;
 	}
 </style>
