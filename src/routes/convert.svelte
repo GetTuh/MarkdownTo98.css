@@ -28,7 +28,7 @@
 						imagePattern,
 						`
 						</br>
-						<div class="window" style="width: 100%">
+						<div class="window" style="width: fit-content;margin:auto">
   <div class="title-bar">
     <div class="title-bar-text">$1</div>
     <div class="title-bar-controls">
