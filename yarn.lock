@@ -443,10 +443,10 @@
     lz-string "^1.5.0"
     pretty-format "^27.0.2"
 
-"@testing-library/svelte@^5.2.4":
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/@testing-library/svelte/-/svelte-5.2.4.tgz#378dbed8a71de0d63c1911b1325a5c6b241aee3c"
-  integrity sha512-EFdy73+lULQgMJ1WolAymrxWWrPv9DWyDuDFKKlUip2PA/EXuHptzfYOKWljccFWDKhhGOu3dqNmoc2f/h/Ecg==
+"@testing-library/svelte@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@testing-library/svelte/-/svelte-5.2.6.tgz#fdbb1a8950d8b57c75602e4fda8b4627e7c37eac"
+  integrity sha512-1Y8cEg/BtV4J6g9irkY0ksz+ueDFYLiikjTLiqvQPkOUeDzR4gg2zECBf8yrOrCy3e2TAOYMcaysFa0bQMyk1w==
   dependencies:
     "@testing-library/dom" "^10.0.0"
 
