@@ -391,10 +391,10 @@
   dependencies:
     import-meta-resolve "^4.1.0"
 
-"@sveltejs/kit@^2.9.1":
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-2.9.1.tgz#46a48ac850d4a63cfd4bfa67e3354ef1eecaf1f4"
-  integrity sha512-D+yH3DTvvkjXdl3Xv7akKmolrArDZRtsFv3nlxJPjlIKsZEpkkInnomKJuAql2TrNGJ2dJMGBO1YYgVn2ILmag==
+"@sveltejs/kit@^2.12.1":
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-2.12.1.tgz#a9da8ef9461598279c0dc9f2ba4a70232e91a758"
+  integrity sha512-M3rPijGImeOkI0DBJSwjqz+YFX2DyOf6NzWgHVk3mqpT06dlYCpcv5xh1q4rYEqB58yQlk4QA1Y35PUqnUiFKw==
   dependencies:
     "@types/cookie" "^0.6.0"
     cookie "^0.6.0"
