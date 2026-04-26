@@ -14,5 +14,16 @@
 <textarea
 	readonly
 	bind:this={el}
-	style="font-size:small;width:-webkit-fill-available;width:-moz-available;padding:.5rem;margin:1rem;resize:none;overflow:hidden;"
+	style="width:-webkit-fill-available;width:-moz-available;padding:.5rem;margin:1rem;resize:none;overflow:hidden;"
 >{displayText}</textarea>
+
+<style>
+	textarea {
+		font-size: small;
+	}
+	@media (max-width: 768px) {
+		textarea {
+			font-size: 1rem;
+		}
+	}
+</style>

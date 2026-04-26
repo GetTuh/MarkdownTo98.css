@@ -15,7 +15,7 @@
 
 	const headerPattern = /^(#+) (.+)/;
 	const boldPattern = /(\*\*|__)(.*?)\1/g;
-	const italicPattern = /_(\S(.*?\S)?)_/g;
+	const italicPattern = /\*(\S(.*?\S)?)\*/g;
 	const imagePattern = /!\[([^\[]+)\]\(([^\)]+)\)/;
 
 	type TextLine = { type: 'text' | 'header' | 'box' | 'hr'; html: string };
@@ -47,7 +47,7 @@
 				if (line.startsWith('>')) {
 					return { type: 'box', html: line };
 				}
-				if (line === '***' || line === '* * *') {
+				if (line === '---') {
 					return { type: 'hr', html: line };
 				}
 				boldPattern.lastIndex = 0;
