@@ -1,27 +1,26 @@
-<script>
-	// @ts-nocheck
-
+<script lang="ts">
 	import Convert from './convert.svelte';
-	let convertcomponent
-	let noteText = `Help:
-# 	 Heading 
+
+	let noteText = `# Heading
 **bold text**
 _italic text_
-> Blockquotes
-	`;
+> Blockquote`;
 </script>
 
 <div class="boxi">
-	<textarea bind:value={noteText} on:input={convertcomponent.convertToHtml(noteText)}></textarea>
-	<Convert bind:this={convertcomponent}/>
+	<textarea bind:value={noteText}></textarea>
+	<Convert text={noteText} />
 </div>
 <div>
 	Help:
-	<ul># Heading</ul>
-	<ul>**bold text**</ul>
-	<ul>_italic text_</ul>
-	<ul>>blockquotes</ul>
-	<ul>![image](https://link.com)</ul>
+	<ul>
+		<li># Heading</li>
+		<li>**bold text**</li>
+		<li>_italic text_</li>
+		<li>&gt; blockquotes</li>
+		<li>![image](https://link.com)</li>
+		<li>*** or * * * for a divider</li>
+	</ul>
 </div>
 
 <style>

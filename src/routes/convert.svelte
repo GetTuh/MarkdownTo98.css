@@ -3,7 +3,7 @@
 	import TextSegment from './components/TextSegment.svelte';
 	import CenterBigText from './components/CenterBigText.svelte';
 	import TextBox from './components/TextBox.svelte';
-	import BottomWindowSegment from './components/BottomWindowSegment.svelte';
+	import ImageWindow from './components/ImageWindow.svelte';
 	import Toolbar from './components/Toolbar.svelte';
 
 	export let text: string = '';
@@ -13,48 +13,36 @@
 	const headerPattern = /^(#+) (.+)/;
 	const boldPattern = /(\*\*|__)(.*?)\1/g;
 	const italicPattern = /_(\S(.*?\S)?)_/g;
-	const imagePattern = /!\[([^\[]+)\]\(([^\)]+)\)/g;
+	const imagePattern = /!\[([^\[]+)\]\(([^\)]+)\)/;
 
-	type Line = { html: string; isImage: boolean };
+	type TextLine = { type: 'text' | 'header' | 'box' | 'hr'; html: string };
+	type ImageLine = { type: 'image'; alt: string; src: string };
+	type Line = TextLine | ImageLine;
 
 	$: lines = (text || '')
 		.split('\n')
 		.filter(Boolean)
 		.map((line): Line => {
-			imagePattern.lastIndex = 0;
-			if (imagePattern.test(line)) {
-				imagePattern.lastIndex = 0;
-				return {
-					html: line.replace(
-						imagePattern,
-						`</br>
-<div class="window" style="width: fit-content;margin:auto">
-  <div class="title-bar">
-    <div class="title-bar-text">$1</div>
-    <div class="title-bar-controls">
-      <button aria-label="Minimize"></button>
-      <button aria-label="Maximize"></button>
-      <button aria-label="Close"></button>
-    </div>
-  </div>
-  <fieldset style="background-color:#dfdfdf; padding:unset;">
-    <img src='$2' style="display:block; margin:auto; max-width:100%;">
-  </fieldset>
-</div>`
-					),
-					isImage: true
-				};
+			const imageMatch = imagePattern.exec(line);
+			if (imageMatch) {
+				return { type: 'image', alt: imageMatch[1], src: imageMatch[2] };
+			}
+			if (headerPattern.test(line)) {
+				return { type: 'header', html: line };
+			}
+			if (line.startsWith('>')) {
+				return { type: 'box', html: line };
+			}
+			if (line === '***' || line === '* * *') {
+				return { type: 'hr', html: line };
 			}
 			boldPattern.lastIndex = 0;
 			italicPattern.lastIndex = 0;
 			return {
-				html: line.replace(boldPattern, '<b>$2</b>').replace(italicPattern, '<i>$1</i>'),
-				isImage: false
+				type: 'text',
+				html: line.replace(boldPattern, '<b>$2</b>').replace(italicPattern, '<i>$1</i>')
 			};
 		});
-
-	const isHeader = (line: string) => headerPattern.test(line);
-	const isBox = (line: string) => line.startsWith('>');
 </script>
 
 <div style="margin: 0.2rem 0.5rem;">
@@ -65,17 +53,17 @@
 		</fieldset>
 		<fieldset class="inner">
 			{#each lines as line}
-				{#if line.isImage}
-					{@html line.html}
-				{:else if isHeader(line.html)}
+				{#if line.type === 'image'}
+					<ImageWindow alt={line.alt} src={line.src} />
+				{:else if line.type === 'header'}
 					<CenterBigText
 						text={line.html.substring(line.html.indexOf(' ') + 1)}
 						icon="accessibility_two_windows"
 					/>
-				{:else if isBox(line.html)}
-					<TextBox text={line.html.substring(0).trim()} />
-				{:else if line.html === '* * *' || line.html === '***'}
-					<BottomWindowSegment textArray={['...']} />
+				{:else if line.type === 'box'}
+					<TextBox text={line.html.trim()} />
+				{:else if line.type === 'hr'}
+					<hr />
 				{:else}
 					<TextSegment text={line.html} />
 				{/if}
@@ -92,5 +80,10 @@
 		margin: 0%;
 		padding: 0%;
 		margin-top: 0.1%;
+	}
+	hr {
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		color: black;
 	}
 </style>

@@ -2,8 +2,7 @@
 	import { onMount } from 'svelte';
 	export let text: string;
 
-	text = text.split(' ').slice(1).join(' ');
-
+	let displayText = text.split(' ').slice(1).join(' ');
 	let el: HTMLTextAreaElement;
 
 	onMount(() => {
@@ -12,4 +11,8 @@
 	});
 </script>
 
-<textarea readonly bind:this={el} style="font-size:small;width:-webkit-fill-available;width:-moz-available;padding:.5rem;margin:1rem;resize:none;overflow:hidden;">{text}</textarea>
+<textarea
+	readonly
+	bind:this={el}
+	style="font-size:small;width:-webkit-fill-available;width:-moz-available;padding:.5rem;margin:1rem;resize:none;overflow:hidden;"
+>{displayText}</textarea>
