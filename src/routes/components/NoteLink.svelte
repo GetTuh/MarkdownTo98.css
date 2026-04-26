@@ -11,7 +11,7 @@
 		: null;
 </script>
 
-<button disabled={!url} on:click={() => { if (url) { window.scrollTo(0, 0); window.location.href = url; } }}>
+<button disabled={!url} on:click={() => { if (url) window.location.href = url; }}>
 	{#if index === 0}
 		<img src="https://win98icons.alexmeub.com/icons/png/wm-0.png" alt="prev" style="transform:scaleX(-1)" />
 	{/if}
