@@ -1,11 +1,15 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	export let text: string;
-	let customStyle = `margin:1rem;;font-size: small;height:${text.split(' ')[0]}rem;width:-webkit-fill-available;width:-moz-available;width:-moz-available;padding:.5rem`;
-	text = text
-		.split(' ')
-		.filter((_, index) => (index ? 1 : 0))
-		.join(' ');
+
+	text = text.split(' ').slice(1).join(' ');
+
+	let el: HTMLTextAreaElement;
+
+	onMount(() => {
+		el.style.height = '0';
+		el.style.height = el.scrollHeight + 'px';
+	});
 </script>
 
-<!-- Textbox height has to be dependent on the length of the text!  -->
-<textarea readonly style={customStyle}>{text}</textarea>
+<textarea readonly bind:this={el} style="font-size:small;width:-webkit-fill-available;width:-moz-available;padding:.5rem;margin:1rem;resize:none;overflow:hidden;">{text}</textarea>

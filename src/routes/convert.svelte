@@ -58,7 +58,7 @@
 </script>
 
 <div style="margin: 0.2rem 0.5rem;">
-	<div class="window" style="max-width: 40rem; margin: auto;">
+	<div class="window" style="width: min(60rem, 92vw); margin: auto;">
 		<TitleBar text={title} />
 		<fieldset class="toolbar">
 			<Toolbar {date} />
