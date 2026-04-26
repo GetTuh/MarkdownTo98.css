@@ -2,6 +2,8 @@
 	import TitleBar from './components/TitleBar.svelte';
 	import TextSegment from './components/TextSegment.svelte';
 	import CenterBigText from './components/CenterBigText.svelte';
+	import SubHeading from './components/SubHeading.svelte';
+	import SmallHeading from './components/SmallHeading.svelte';
 	import TextBox from './components/TextBox.svelte';
 	import ImageWindow from './components/ImageWindow.svelte';
 	import Toolbar from './components/Toolbar.svelte';
@@ -18,7 +20,7 @@
 	const italicPattern = /\*(\S(.*?\S)?)\*/g;
 	const imagePattern = /!\[([^\[]+)\]\(([^\)]+)\)/;
 
-	type TextLine = { type: 'text' | 'header' | 'box' | 'hr'; html: string };
+	type TextLine = { type: 'text' | 'h1' | 'h2' | 'h3' | 'box' | 'hr'; html: string };
 	type ImageLine = { type: 'image'; alt: string; src: string };
 	type LinkEntry = { noteName: string; index: number };
 	type LinkLine = { type: 'links'; entries: LinkEntry[] };
@@ -41,8 +43,11 @@
 						entries: allLinks.map((m) => ({ noteName: m[1], index: linkCount++ }))
 					};
 				}
-				if (headerPattern.test(line)) {
-					return { type: 'header', html: line };
+				const headerMatch = headerPattern.exec(line);
+				if (headerMatch) {
+					const level = headerMatch[1].length;
+					const type = level === 1 ? 'h1' : level === 2 ? 'h2' : 'h3';
+					return { type, html: headerMatch[2] };
 				}
 				if (line.startsWith('>')) {
 					return { type: 'box', html: line };
@@ -78,11 +83,12 @@
 							<NoteLink noteName={entry.noteName} index={entry.index} {notes} {pass} />
 						{/each}
 					</div>
-				{:else if line.type === 'header'}
-					<CenterBigText
-						text={line.html.substring(line.html.indexOf(' ') + 1)}
-						icon="accessibility_two_windows"
-					/>
+				{:else if line.type === 'h1'}
+					<CenterBigText text={line.html} icon="accessibility_two_windows" />
+				{:else if line.type === 'h2'}
+					<SubHeading text={line.html} />
+				{:else if line.type === 'h3'}
+					<SmallHeading text={line.html} />
 				{:else if line.type === 'box'}
 					<TextBox text={line.html.trim()} />
 				{:else if line.type === 'hr'}

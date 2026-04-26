@@ -2,8 +2,10 @@
 	import Convert from './convert.svelte';
 
 	let noteText = `# Heading
+## Sub-heading
+### Small heading
 **bold text**
-_italic text_
+*italic text*
 > Blockquote`;
 </script>
 
@@ -15,11 +17,13 @@ _italic text_
 	Help:
 	<ul>
 		<li># Heading</li>
+		<li>## Sub-heading</li>
+		<li>### Small heading</li>
 		<li>**bold text**</li>
-		<li>_italic text_</li>
+		<li>*italic text*</li>
 		<li>&gt; blockquotes</li>
 		<li>![image](https://link.com)</li>
-		<li>*** or * * * for a divider</li>
+		<li>--- for a divider</li>
 	</ul>
 </div>
 
