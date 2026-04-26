@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let textArray: Array<string>;
+	export const textArray: Array<string> = [];
 </script>
 
 <!-- {@html '</fieldset><fieldset>'} -->
