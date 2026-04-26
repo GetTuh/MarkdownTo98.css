@@ -6,52 +6,52 @@
 	import BottomWindowSegment from './components/BottomWindowSegment.svelte';
 	import Toolbar from './components/Toolbar.svelte';
 
-	let htmlAll: string[] = [];
+	export let text: string = '';
+	export let title: string = '';
+	export let date: string = '';
+
 	const headerPattern = /^(#+) (.+)/;
 	const boldPattern = /(\*\*|__)(.*?)\1/g;
 	const italicPattern = /_(\S(.*?\S)?)_/g;
 	const imagePattern = /!\[([^\[]+)\]\(([^\)]+)\)/g;
 
-	let title: string;
-	let date: string;
+	type Line = { html: string; isImage: boolean };
 
-	export const convertToHtml = (text: string = '', faunaTitle: string, faunaDate: string) => {
-		title = faunaTitle;
-		date = faunaDate;
-		console.log(text.match(imagePattern));
-		htmlAll = text
-			.split('\n')
-			.filter(Boolean)
-			.map((line) => {
-				if (imagePattern.test(line)) {
-					return line.replace(
+	$: lines = (text || '')
+		.split('\n')
+		.filter(Boolean)
+		.map((line): Line => {
+			imagePattern.lastIndex = 0;
+			if (imagePattern.test(line)) {
+				imagePattern.lastIndex = 0;
+				return {
+					html: line.replace(
 						imagePattern,
-						`
-						</br>
-						<div class="window" style="width: fit-content;margin:auto">
+						`</br>
+<div class="window" style="width: fit-content;margin:auto">
   <div class="title-bar">
     <div class="title-bar-text">$1</div>
     <div class="title-bar-controls">
       <button aria-label="Minimize"></button>
       <button aria-label="Maximize"></button>
       <button aria-label="Close"></button>
-	  
     </div>
-	
   </div>
-  						<fieldset style="background-color:#dfdfdf; padding:unset;">
-							<img src='$2' style="display:block; margin:auto; max-width:100%;">
-					
-						</fieldset>
-</div>
-
-		  `
-					);
-				} else {
-					return line.replace(boldPattern, '<b>$2</b>').replace(italicPattern, '<i>$1</i>');
-				}
-			});
-	};
+  <fieldset style="background-color:#dfdfdf; padding:unset;">
+    <img src='$2' style="display:block; margin:auto; max-width:100%;">
+  </fieldset>
+</div>`
+					),
+					isImage: true
+				};
+			}
+			boldPattern.lastIndex = 0;
+			italicPattern.lastIndex = 0;
+			return {
+				html: line.replace(boldPattern, '<b>$2</b>').replace(italicPattern, '<i>$1</i>'),
+				isImage: false
+			};
+		});
 
 	const isHeader = (line: string) => headerPattern.test(line);
 	const isBox = (line: string) => line.startsWith('>');
@@ -64,18 +64,20 @@
 			<Toolbar {date} />
 		</fieldset>
 		<fieldset class="inner">
-			{#each htmlAll as line}
-				{#if isHeader(line)}
+			{#each lines as line}
+				{#if line.isImage}
+					{@html line.html}
+				{:else if isHeader(line.html)}
 					<CenterBigText
-						text={line.substring(line.indexOf(' ') + 1)}
+						text={line.html.substring(line.html.indexOf(' ') + 1)}
 						icon="accessibility_two_windows"
 					/>
-				{:else if isBox(line)}
-					<TextBox text={line.substring(0).trim()} />
-				{:else if line === '* * *' || line === '***'}
+				{:else if isBox(line.html)}
+					<TextBox text={line.html.substring(0).trim()} />
+				{:else if line.html === '* * *' || line.html === '***'}
 					<BottomWindowSegment textArray={['...']} />
 				{:else}
-					<TextSegment text={line} />
+					<TextSegment text={line.html} />
 				{/if}
 			{/each}
 		</fieldset>
@@ -86,17 +88,6 @@
 	.inner {
 		margin: 0.25rem;
 	}
-	/* 
-	imagesubtitle {
-		background: rgb(0, 128, 128);
-		text-align: center;
-		color: white;
-		display: inline-block;
-		padding: 0.1rem;
-		padding-left: 0.4rem;
-		padding-right: 0.4rem;
-		padding-top: 0;
-	} */
 	.toolbar {
 		margin: 0%;
 		padding: 0%;

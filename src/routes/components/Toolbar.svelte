@@ -3,7 +3,7 @@
 </script>
 
 <div class="toolbar" id="menu-bar-toolbar">
-	<div class="toolbar-drag-handle" />
+	<div class="toolbar-drag-handle"></div>
 	<div class="menus" role="menubar" aria-label="Application Menu" style="touch-action: none;">
 		<div
 			class="menu-button item-disabled"

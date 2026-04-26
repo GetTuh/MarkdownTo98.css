@@ -10,9 +10,9 @@
 	/>
 	<div class="title-bar-text">{text}</div>
 	<div class="title-bar-controls">
-		<button aria-label="Minimize" />
-		<button aria-label="Maximize" />
-		<button aria-label="Close" />
+		<button aria-label="Minimize"></button>
+		<button aria-label="Maximize"></button>
+		<button aria-label="Close"></button>
 	</div>
 </div>
 
